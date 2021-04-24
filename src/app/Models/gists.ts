@@ -54,6 +54,7 @@ interface IUserGist extends IBaseGist {
     public: boolean;
     truncated: boolean;
     files: any;
+    tagArray: string[];
     owner: IOwner;
 
 }

@@ -7,10 +7,17 @@ import { AppComponent } from './app.component';
 import { GitGistService } from './Services/GitGistService/git-gist.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AppService } from './Services/AppService/app.service';
+import { GistlistComponent } from './gistlist/gistlist.component';
+import { GistdetailComponent } from './gistdetail/gistdetail.component';
+import { GistListResolve } from './gistlist/gistlist.resolve';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GistlistComponent,
+    GistdetailComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +26,7 @@ import { AppService } from './Services/AppService/app.service';
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [GitGistService, AppService],
+  providers: [GitGistService, AppService, GistListResolve],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

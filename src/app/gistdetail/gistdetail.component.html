@@ -1,0 +1,13 @@
+<div class="titleDetail">
+  <div class="imgDv">
+    <figure><img [src]="propDetails.coverPhoto" /></figure>
+  </div>
+  <div class="txtDv">
+    <h2>{{propDetails.projectName}}</h2>
+    <p>{{propDetails.projectLongDescription}}</p>
+    
+  </div>
+  <div class="btnDv">
+    <button mat-button [routerLink]="'/checkout/' + propId">Invest Now</button>
+  </div>
+</div>

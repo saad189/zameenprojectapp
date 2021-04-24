@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 const apiUrl = 'https://api.github.com';
@@ -14,18 +14,23 @@ export class GitGistService {
   constructor(private http: HttpClient) {
   }
 
-  searchUserGists(username: string): Observable<IUserGist[]> {
+  searchUserGists(username: string): Observable<any> {
     const request = apiUrl + `/users/${username}${this.gists}`;
-    return this.http.get<IUserGist[]>(request).pipe(catchError(this.handlerror));
+    return this.http.get(request)
+      .pipe(map((response: any) => {
+        response.forEach(element => {
+          this.setTags(element.files);
+          this.generateTagsArray(element);
+          this.addForkInfo(element);
+        });
+        return response;
+      }))
+      .pipe(catchError(this.handlerror));
   }
 
   getSingleGist(gistId: string): Observable<IBaseGist> {
     const request = apiUrl + `${this.gists}/${gistId}`;
     return this.http.get<IBaseGist>(request).pipe(catchError(this.handlerror));
-  }
-  getPublicGits(): Observable<IUserGist[]> {
-    const request = apiUrl + `${this.gists}/public`;
-    return this.http.get<IUserGist[]>(request).pipe(catchError(this.handlerror));
   }
 
   getGistForks(gistId: string) {
@@ -62,6 +67,15 @@ export class GitGistService {
         }
       }
     });
-
+  }
+  generateTagsArray(gist: IUserGist) {
+    const tagArray = [];
+    for (const fileName in gist.files) {
+      if (gist.files.hasOwnProperty(fileName)) {
+        const currentFile = gist.files[fileName];
+        tagArray.push(currentFile);
+      }
+    }
+    gist.tagArray = tagArray;
   }
 }

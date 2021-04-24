@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="table-for-listing">
+      <table class="table table-borderless table-hover">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">URL</th>
+            <th scope="col">Forkers</th>
+            <th scope="col">File Badges</th>
+            <th scope="col">Truncated</th>
+            <th scope="col">Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of userGists">
+            <td><strong>{{item.id}}</strong></td>
+            <td>{{item.url}}</td>
+            <td>{{item.forkInfo[0].avatar_url}} {{item.forkInfo[1].avatar_url}} {{item.forkInfo[2].avatar_url}}</td>
+            <td>{{item.tagArray[0]}}</td>
+            <td>{{item.truncated}}</td>
+            <td>{{item.Time | date : 'MMM d, y'}}</td>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
