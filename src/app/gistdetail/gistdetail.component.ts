@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AppService } from '../Services/AppService/app.service';
 import { GitGistService } from '../Services/GitGistService/git-gist.service';
 
@@ -9,14 +10,17 @@ import { GitGistService } from '../Services/GitGistService/git-gist.service';
 })
 export class GistdetailComponent implements OnInit {
   public currentGist: IBaseGist;
-  constructor(private gistService: GitGistService, private appService: AppService) { }
+  constructor(private gistService: GitGistService, private appService: AppService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-
+    const gistId = String(this.route.snapshot.paramMap.get('gist_id'));
+    this.openGistContent(gistId);
   }
   openGistContent(gistId: string) {
     this.gistService.getSingleGist(gistId).subscribe(response => {
       this.currentGist = response;
+      console.log(this.currentGist);
+      this.appService.successmessage('Success', 'Data Fetched');
     }, error => {
       this.appService.errormessage('Error', error);
     });

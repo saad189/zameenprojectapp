@@ -11,11 +11,11 @@ const routes: Routes = [
     children: [
       {
         path: 'list/:userName', component: GistlistComponent
-      },
-      {
-        path: 'gist-detail/:gist_id', component: GistdetailComponent
-      },
+      }
     ]
+  },
+  {
+    path: 'detail/:gist_id', component: GistdetailComponent
   },
   { path: '**', redirectTo: '' }
 
