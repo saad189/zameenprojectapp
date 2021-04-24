@@ -9,8 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppService } from './Services/AppService/app.service';
 import { GistlistComponent } from './gistlist/gistlist.component';
 import { GistdetailComponent } from './gistdetail/gistdetail.component';
-import { GistListResolve } from './gistlist/gistlist.resolve';
 import { MainComponent } from './main/main.component';
+import { FormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -21,12 +22,13 @@ import { MainComponent } from './main/main.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [GitGistService, AppService, GistListResolve],
+  providers: [GitGistService, AppService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

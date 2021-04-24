@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="userGists.length > 0" class="container">
   <div class="row">
     <div class="table-for-listing">
       <table class="table table-borderless table-hover">
@@ -16,7 +16,13 @@
           <tr *ngFor="let item of userGists">
             <td><strong>{{item.id}}</strong></td>
             <td>{{item.url}}</td>
-            <td>{{item.forkInfo[0].avatar_url}} {{item.forkInfo[1].avatar_url}} {{item.forkInfo[2].avatar_url}}</td>
+            <td>
+              <div *ngIf="item.forkInfo" [class]="item.forkInfo?.length > 0 ? 'imageHolder' : 'd-none' ">
+                <img [src]="item.forkInfo[0]?.avatar_url">
+                <img [src]="item.forkInfo[1]?.avatar_url">
+                <img [src]="item.forkInfo[2]?.avatar_url">
+              </div>
+            </td>
             <td>{{item.tagArray[0]}}</td>
             <td>{{item.truncated}}</td>
             <td>{{item.Time | date : 'MMM d, y'}}</td>

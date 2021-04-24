@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { AppService } from '../Services/AppService/app.service';
 import { GitGistService } from '../Services/GitGistService/git-gist.service';
 
@@ -9,17 +10,17 @@ import { GitGistService } from '../Services/GitGistService/git-gist.service';
 })
 export class GistlistComponent implements OnInit {
 
-  publicGists: IUserGist[];
-  userGists: IUserGist[];
-  constructor(private gistService: GitGistService, private appService: AppService) { }
+  userGists: IUserGist[] = [];
+  constructor(private gistService: GitGistService, private appService: AppService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    //this.openGistContent('6cad326836d38bd3a7ae');
-    this.showSingleUserGist('octocat');
+    const userName = String(this.route.snapshot.paramMap.get('userName'));
+    this.showSingleUserGist(userName);
+    console.log('gits:', this.userGists);
   }
 
   showSingleUserGist(userName: string) {
-    this.gistService.searchUserGists(userName).subscribe(response => {
+    this.gistService.getUserGists(userName).subscribe(response => {
 
       this.userGists = response;
       console.log(response);

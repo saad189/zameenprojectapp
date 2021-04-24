@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { AppService } from '../AppService/app.service';
 
 const apiUrl = 'https://api.github.com';
 
@@ -11,10 +12,10 @@ const apiUrl = 'https://api.github.com';
 export class GitGistService {
   private gists = '/gists';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private appService: AppService) {
   }
 
-  searchUserGists(username: string): Observable<any> {
+  getUserGists(username: string): Observable<any> {
     const request = apiUrl + `/users/${username}${this.gists}`;
     return this.http.get(request)
       .pipe(map((response: any) => {
@@ -41,6 +42,7 @@ export class GitGistService {
   handlerror(errorObject: any) {
     const message = errorObject.error.message;
     console.log('error:', message);
+    this.appService.errormessage('Error', message);
     return throwError(errorObject.error);
   }
 

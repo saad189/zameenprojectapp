@@ -13,7 +13,6 @@
           }
           th {
             font-size: 14px;
-            font-family: "Poppins";
             color: #131523;
             font-weight: 500;
             height: 48px;
@@ -30,18 +29,11 @@
           }
           td {
             font-size: 12px;
-            font-family: "Poppins";
             color: #131523;
             font-weight: normal;
             padding: 5px;
             vertical-align: middle;
             height: 38px;
-            .cancel {
-              color: #FF0000;
-            }
-            .confirm {
-              color: #629552;
-            }
             a.action-link {
               color: #131523;
               text-decoration: underline;
@@ -54,20 +46,20 @@
               margin-left: 20px;
               mat-icon.mat-icon {font-size: 15px; position: absolute; margin-left: -30px; margin-top: 2px;}
             }
-            span.Upcomings {
-              margin-left: 20px; color: #F7A733 !important;
-              mat-icon.mat-icon {font-size: 15px; position: absolute; margin-left: -30px; margin-top: 2px;}
-            }
-            span.Confirmed {
-              margin-left: 18px; color: #72BB53 !important;
-              mat-icon.mat-icon {font-size: 15px; position: absolute; margin-left: -32px; margin-top: 2px;}
-            }
-            span.PendingCross {
-              margin-left: 20px; color: #EE3D21 !important;
-              mat-icon.mat-icon {font-size: 15px; position: absolute; margin-left: -30px; margin-top: 2px;}
-            }
           }
         }
       }
+    }
+  }
+
+  .imageHolder{
+    display: inline-block;
+    img{
+      max-width: 50px;
+      max-height: 50px;
+      border-radius: 4px;
+      padding: 5px;
+      margin: 10px;
+      border: 1px solid blueviolet;
     }
   }
