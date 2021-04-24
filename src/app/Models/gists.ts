@@ -12,15 +12,21 @@ interface IBaseGist {
     description: string;
     comments: number;
     comments_url: string;
+    forkInfo: IForkInfo[];
 }
 
-
+interface IForkInfo {
+    createdAt: Date;
+    avatar_url: string;
+    login: string;
+}
 interface IFile {
     filename: string;
     language: string;
     raw_url: string;
     size: number;
     type: string;
+    tag: string;
 }
 
 interface IOwner {
@@ -47,7 +53,7 @@ interface IOwner {
 interface IUserGist extends IBaseGist {
     public: boolean;
     truncated: boolean;
-    files: IFile;
+    files: any;
     owner: IOwner;
 
 }

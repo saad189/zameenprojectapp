@@ -14,24 +14,45 @@ export class AppComponent implements OnInit {
   constructor(private gistService: GitGistService, private appService: AppService) {
   }
   ngOnInit(): void {
-    this.gistService.searchUserGists('octocat').subscribe(response => {
+
+    this.openGistContent('6cad326836d38bd3a7ae');
+    this.showSingleUserGist('octocat');
+  }
+
+  showSingleUserGist(userName: string) {
+    this.gistService.searchUserGists(userName).subscribe(response => {
+      response.forEach(element => {
+        this.gistService.setTags(element.files);
+        this.gistService.addForkInfo(element);
+      });
       console.log(response);
     },
       error => {
         console.log(error);
         this.appService.errormessage('Error', error.message);
       });
+  }
+
+  showPublicGists() {
     this.gistService.getPublicGits().subscribe(response => {
-      this.publicGists = response as IUserGist[];
+      response.forEach(element => {
+        this.gistService.setTags(element.files);
+      });
+      this.publicGists = response;
       console.log('Public Gists:', this.publicGists);
-      //console.log(response);
+
     },
       error => {
         console.log(error);
         this.appService.errormessage('Error', error.message);
       });
   }
-  openGistContent() {
 
+  openGistContent(gistId: string) {
+    this.gistService.getSingleGist(gistId).subscribe(response => {
+      console.log('Single Gist:', response);
+    }, error => {
+      this.appService.errormessage('Error', error);
+    });
   }
 }
