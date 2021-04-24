@@ -25,11 +25,15 @@
             </td>
             <td>
               <div *ngFor="let tag of currentGist.tagArray">{{tag}}</div>
+              <div (click)="openDocumentFile(file.raw_url)" *ngFor="let file of fileArray">{{file.filename}}</div>
             </td>
             <td>{{currentGist.truncated}}</td>
             <td>{{currentGist.created_at | date : 'MMM d, y'}}</td>
         </tbody>
       </table>
+    </div>
+    <div class="row">
+
     </div>
   </div>
 </div>

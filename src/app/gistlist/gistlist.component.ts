@@ -17,17 +17,14 @@ export class GistlistComponent implements OnInit {
   ngOnInit() {
     const userName = String(this.route.snapshot.paramMap.get('userName'));
     this.showSingleUserGist(userName);
-    console.log('gits:', this.userGists);
   }
 
   showSingleUserGist(userName: string) {
     this.gistService.getUserGists(userName).subscribe(response => {
-      this.appService.successmessage('Success', 'Data Fetched');
+      response.length > 0 ? this.appService.successmessage('Success', 'Data Fetched') : '';
       this.userGists = response;
-      console.log(response);
     },
       error => {
-        console.log(error);
         this.appService.errormessage('Error', error.message);
       });
   }

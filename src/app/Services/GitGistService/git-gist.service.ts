@@ -46,7 +46,6 @@ export class GitGistService {
 
   handlerror(errorObject: any) {
     const message = errorObject.error.message;
-    console.log('error:', message);
     this.appService.errormessage('Error', message);
     return throwError(errorObject.error);
   }
