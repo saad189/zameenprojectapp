@@ -1,10 +1,9 @@
 <div class="container">
   <div class="row">
-    <div>
-      <h4 class="mt-4">Search User's Gists</h4>
-    </div>
+    <h4 class="mt-4">Search User's Gists</h4>
+  </div>
+  <div class="row">
     <div class="col md-2">
-
       <input type="text" class="form-control pl-2" [(ngModel)]="userName">
       <button class="btn btn-primary" routerLink="/list/{{userName}}">Search Gist</button>
     </div>

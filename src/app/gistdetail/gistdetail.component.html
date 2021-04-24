@@ -1,10 +1,35 @@
-<div class="titleDetail">
-  <div class="imgDv">
-    <figure><img [src]="" /></figure>
-  </div>
-  <div class="txtDv">
-    <h2></h2>
-    <p></p>
-    
+<div *ngIf="currentGist" class="container">
+  <div class="row">
+    <div class="table-for-listing">
+      <table class="table table-borderless table-hover">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">URL</th>
+            <th scope="col">Forkers</th>
+            <th scope="col">File Badges</th>
+            <th scope="col">Truncated</th>
+            <th scope="col">Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>{{currentGist.id}}</strong></td>
+            <td>{{currentGist.url}}</td>
+            <td>
+              <div *ngIf="currentGist.forkInfo" [class]="currentGist.forkInfo?.length > 0 ? 'imageHolder' : 'd-none' ">
+                <img [src]="currentGist.forkInfo[0]?.avatar_url">
+                <img [src]="currentGist.forkInfo[1]?.avatar_url">
+                <img [src]="currentGist.forkInfo[2]?.avatar_url">
+              </div>
+            </td>
+            <td>
+              <div *ngFor="let tag of currentGist.tagArray">{{tag}}</div>
+            </td>
+            <td>{{currentGist.truncated}}</td>
+            <td>{{currentGist.created_at | date : 'MMM d, y'}}</td>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

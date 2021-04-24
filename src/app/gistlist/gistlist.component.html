@@ -23,9 +23,11 @@
                 <img [src]="item.forkInfo[2]?.avatar_url">
               </div>
             </td>
-            <td>{{item.tagArray[0]}}</td>
+            <td>
+              <div *ngFor="let tag of item.tagArray">{{tag}}</div>
+            </td>
             <td>{{item.truncated}}</td>
-            <td>{{item.Time | date : 'MMM d, y'}}</td>
+            <td>{{item.created_at | date : 'MMM d, y'}}</td>
         </tbody>
       </table>
     </div>

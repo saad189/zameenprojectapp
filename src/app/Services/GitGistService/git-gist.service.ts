@@ -75,7 +75,7 @@ export class GitGistService {
     for (const fileName in gist.files) {
       if (gist.files.hasOwnProperty(fileName)) {
         const currentFile = gist.files[fileName];
-        tagArray.push(currentFile);
+        tagArray.push(currentFile.tag);
       }
     }
     gist.tagArray = tagArray;

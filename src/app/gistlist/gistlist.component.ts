@@ -21,7 +21,7 @@ export class GistlistComponent implements OnInit {
 
   showSingleUserGist(userName: string) {
     this.gistService.getUserGists(userName).subscribe(response => {
-
+      this.appService.successmessage('Success', 'Data Fetched');
       this.userGists = response;
       console.log(response);
     },
