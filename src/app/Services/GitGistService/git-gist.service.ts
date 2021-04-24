@@ -13,7 +13,6 @@ export class GitGistService {
 
 
   constructor(private http: HttpClient, private appService: AppService) {
-    console.log('GIst Service Works');
   }
 
   searchUserGists(username: string): Observable<any> {
