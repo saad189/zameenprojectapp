@@ -16,13 +16,10 @@ export class GistdetailComponent implements OnInit {
 
   ngOnInit() {
     this.gistService.gistObservable.subscribe((value: IBaseGist) => this.currentGist = value);
-    console.log(this.currentGist);
     if (!this.currentGist.id) {
-      console.log('helo');
       this.router.navigateByUrl('/');
     }
     this.getFiles();
-    console.log(this.fileArray);
   }
   openDocumentFile(documenturl) {
     window.open(documenturl, '_blank');

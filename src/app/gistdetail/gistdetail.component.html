@@ -1,5 +1,8 @@
 <div *ngIf="currentGist" class="container">
   <div class="row">
+    <h4 class="mt-4">Gist Details</h4>
+  </div>
+  <div class="row">
     <div class="table-for-listing">
       <table class="table table-borderless table-hover">
         <thead>
@@ -7,7 +10,7 @@
             <th scope="col">ID</th>
             <th scope="col">URL</th>
             <th scope="col">Forkers</th>
-            <th scope="col">File Badges</th>
+            <th scope="col">Files</th>
             <th scope="col">Truncated</th>
             <th scope="col">Created At</th>
           </tr>
@@ -24,8 +27,9 @@
               </div>
             </td>
             <td>
-              <div *ngFor="let tag of currentGist.tagArray">{{tag}}</div>
-              <div (click)="openDocumentFile(file.raw_url)" *ngFor="let file of fileArray">{{file.filename}}</div>
+              <a (click)="openDocumentFile(file.raw_url)" style="cursor: pointer;"
+                *ngFor="let file of fileArray">{{file.filename}}</a>
+              <!-- <div *ngFor="let tag of currentGist.tagArray">{{tag}}</div> -->
             </td>
             <td>{{currentGist.truncated}}</td>
             <td>{{currentGist.created_at | date : 'MMM d, y'}}</td>
