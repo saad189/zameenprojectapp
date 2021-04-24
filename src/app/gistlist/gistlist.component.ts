@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { AppService } from '../Services/AppService/app.service';
 import { GitGistService } from '../Services/GitGistService/git-gist.service';
 
@@ -11,7 +11,8 @@ import { GitGistService } from '../Services/GitGistService/git-gist.service';
 export class GistlistComponent implements OnInit {
 
   userGists: IUserGist[] = [];
-  constructor(private gistService: GitGistService, private appService: AppService, private route: ActivatedRoute) { }
+  constructor(private gistService: GitGistService, private appService: AppService,
+    private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     const userName = String(this.route.snapshot.paramMap.get('userName'));
@@ -29,6 +30,11 @@ export class GistlistComponent implements OnInit {
         console.log(error);
         this.appService.errormessage('Error', error.message);
       });
+  }
+
+  showDetails(gistId: string) {
+    this.gistService.updateCurrentGist(this.userGists.find(gist => gist.id === gistId));
+    this.router.navigateByUrl(`/detail/${gistId}`);
   }
 
 

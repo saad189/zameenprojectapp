@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { AppService } from '../AppService/app.service';
@@ -12,9 +12,14 @@ const apiUrl = 'https://api.github.com';
 export class GitGistService {
   private gists = '/gists';
 
+  private gistData = new BehaviorSubject({});
+  public gistObservable = this.gistData.asObservable();
   constructor(private http: HttpClient, private appService: AppService) {
   }
 
+  updateCurrentGist(value: IBaseGist) {
+    this.gistData.next(value);
+  }
   getUserGists(username: string): Observable<any> {
     const request = apiUrl + `/users/${username}${this.gists}`;
     return this.http.get(request)

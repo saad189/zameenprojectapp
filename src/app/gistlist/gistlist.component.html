@@ -13,7 +13,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr routerLink="/detail/{{item.id}}" *ngFor="let item of userGists">
+          <tr (click)="showDetails(item.id)" *ngFor="let item of userGists">
             <td><strong>{{item.id}}</strong></td>
             <td>{{item.url}}</td>
             <td>

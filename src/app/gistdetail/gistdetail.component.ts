@@ -13,8 +13,10 @@ export class GistdetailComponent implements OnInit {
   constructor(private gistService: GitGistService, private appService: AppService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const gistId = String(this.route.snapshot.paramMap.get('gist_id'));
-    this.openGistContent(gistId);
+    this.gistService.gistObservable.subscribe((value: IBaseGist) => this.currentGist = value);
+    console.log(this.currentGist);
+    // const gistId = String(this.route.snapshot.paramMap.get('gist_id'));
+    // this.openGistContent(gistId);
   }
   openGistContent(gistId: string) {
     this.gistService.getSingleGist(gistId).subscribe(response => {
