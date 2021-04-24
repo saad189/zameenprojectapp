@@ -4,7 +4,7 @@ import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { AppService } from '../AppService/app.service';
 
-const apiUrl = 'https://api.github.com/gists';
+const apiUrl = 'https://api.github.com';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class GitGistService {
   }
 
   getPublicGits() {
-    const userRequest = apiUrl + `/public`;
+    const userRequest = apiUrl + `/gists/public`;
     return this.http.get(userRequest).pipe(catchError(this.handlerror));
   }
 

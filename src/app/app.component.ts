@@ -10,10 +10,11 @@ import { GitGistService } from './Services/GitGistService/git-gist.service';
 export class AppComponent implements OnInit {
   title = 'zameenprojectapp';
   userName = '';
+  publicGists: IUserGist[];
   constructor(private gistService: GitGistService, private appService: AppService) {
   }
   ngOnInit(): void {
-    this.gistService.searchUserGists('saad189').subscribe(response => {
+    this.gistService.searchUserGists('octocat').subscribe(response => {
       console.log(response);
     },
       error => {
@@ -21,7 +22,9 @@ export class AppComponent implements OnInit {
         this.appService.errormessage('Error', error.message);
       });
     this.gistService.getPublicGits().subscribe(response => {
-      console.log(response);
+      this.publicGists = response as IUserGist[];
+      console.log('Public Gists:', this.publicGists);
+      //console.log(response);
     },
       error => {
         console.log(error);
